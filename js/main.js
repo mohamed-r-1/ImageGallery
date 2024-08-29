@@ -1,23 +1,33 @@
+// Select the slider container element
 const slider = document.querySelector('.slider-container');
+
+// Variables to store the starting and ending X coordinates of a touch
 let startX = 0;
 let endX = 0;
 
+// Event listener for touchstart - captures the starting X coordinate when the touch starts
 slider.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX; 
+    startX = e.touches[0].clientX; // Get the X coordinate of the touch
 });
 
+// Event listener for touchend - captures the ending X coordinate when the touch ends
 slider.addEventListener('touchend', (e) => {
-    endX = e.changedTouches[0].clientX; 
+    endX = e.changedTouches[0].clientX; // Get the X coordinate of the touch
 
-    handleSwipe();
+    handleSwipe(); // Call function to handle the swipe
 });
 
+// Function to handle swipe based on the difference between startX and endX
 function handleSwipe() {
-    const threshold = 50;  
+    const threshold = 50;  // Define a threshold for detecting a valid swipe (50 pixels)
+
+    // Check if swipe left (move to the next slide)
     if (startX - endX > threshold) {
-        nextSlide();
-    } else if (endX - startX > threshold) {
-        prevSlide();
+        nextSlide(); // Call function to move to the next slide
+    }
+    // Check if swipe right (move to the previous slide)
+    else if (endX - startX > threshold) {
+        prevSlide(); // Call function to move to the previous slide
     }
 }
 
